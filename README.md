@@ -2,15 +2,26 @@
 
 BT$ is an online business token society simulation where user can see the simplicity of cryptocurrencies and use it a fashionable and interactive way. Although
 BT$ is Anonmynous as profile picture cannot be displayed. You can play around with the following features included in it:
-FEATURES:
+
+
+# FEATURES:
 >> Trade : Trade with top 2 cryptocurrencies(BTC/ETH). Soon, we will add up more cryptocurrencies. These coins does not possess true value, but simulated prices run at random time
+
+
 >> Transfer : Transfer BT$ among other people, anonmynity is still active. Send only to those you know as others cannot trace tx
+
+
 >> Task : Do some simple tasks by betting price on Traded coins on specific date to earn some BT$
 
 COMING FEATURES:
 >> Bank : The Bank will act as Helper to GET loan, stake on traded coins. This depends on how much BT$ you got...
 >> NFT: You will get to buy Rare NFT which will supply you free BT$ on xxxxx times. {Unspecified time} as BONUS
 >> ...
+
+# IMAGES
+![bts_image1](https://user-images.githubusercontent.com/24855083/180589107-843c3bc0-2803-4208-a33a-ca7f6bf8acd2.jpg)
+![bts_image2](https://user-images.githubusercontent.com/24855083/180589108-677a641b-a777-4ed1-840f-eef2e5dc4560.jpg)
+
 
 # Quick start
 Several quick start options are available:
