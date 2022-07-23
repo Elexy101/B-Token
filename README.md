@@ -15,8 +15,11 @@ BT$ is Anonmynous as profile picture cannot be displayed. You can play around wi
 
 COMING FEATURES:
 >> Bank : The Bank will act as Helper to GET loan, stake on traded coins. This depends on how much BT$ you got...
+
 >> NFT: You will get to buy Rare NFT which will supply you free BT$ on xxxxx times. {Unspecified time} as BONUS
->> ...
+
+>> Mining: You will be able to mine B-tokens online. still thinking about this...
+
 
 # IMAGES
 ![bts_image1](https://user-images.githubusercontent.com/24855083/180589107-843c3bc0-2803-4208-a33a-ca7f6bf8acd2.jpg)
