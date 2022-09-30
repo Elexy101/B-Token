@@ -52,6 +52,7 @@
 		<div class="header-right">
 		
 		<!-- IF THE ADMIN CLICKS THE BUTTON, ALL ASSET PRICES ARE AFFECTED -->
+		<?php if($fetch_user['user'] == "Elexy101"){ ?>
 		<form method="get">
 		<div class="dashboard-setting user-notification">
 				<div class="dropdown">
@@ -61,6 +62,7 @@
 				</div>
 			</div>
 		</form>
+		<?php } ?>
 			
 			<div class="dashboard-setting user-notification">
 				<div class="dropdown">
@@ -71,9 +73,11 @@
 			</div>
 			<div class="user-notification">
 				<div class="dropdown">
-					<a class="dropdown-toggle no-arrow" href="#" role="button" data-toggle="dropdown">
+					<a class="dropdown-toggle no-arrow" href="notification.php" >
 						<i class="icon-copy dw dw-notification"></i>
+						<?php if(mysql_num_rows($notifications_two) > 0){  ?>
 						<span class="badge notification-active"></span>
+						<?php }else{} ?>
 					</a>
 					<div class="dropdown-menu dropdown-menu-right">
 						<div class="notification-list mx-h-350 customscroll">

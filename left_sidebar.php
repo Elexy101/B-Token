@@ -28,7 +28,8 @@
 						</a>
 						<ul class="submenu">
 							<li><a href="crypto-main.php">Cryptocurrency</a></li>
-							<li><a href="real-main.php">NFT <small>(coming soon)</small></a></li>
+							<li><a href="real-main.php">NFT <small>(inactive)</small></a></li>
+							<li><a href="real_estate.php">Real Estate <small>(active)</small></a></li>
 						</ul>
 					</li>
 					
@@ -39,8 +40,14 @@
 					</li>
 					
 						<li>
-						<a href="#" class="dropdown-toggle no-arrow">
-							<span class="micon dw dw-building"></span><span class="mtext">BANK <small>(coming soon)</small></span>
+						<a href="goals.php" class="dropdown-toggle no-arrow">
+							<span class="micon dw dw-refresh"></span><span class="mtext">Competition</span>
+						</a>
+					</li>
+					
+						<li>
+						<a href="bank.php" class="dropdown-toggle no-arrow">
+							<span class="micon dw dw-building"></span><span class="mtext">BANK  <small><i class="icon-copy fa fa-circle text-success" aria-hidden="true"></i></small></span>
 						</a>
 					</li>
 					<!-- THIS IS FOR ADMIN -->

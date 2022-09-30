@@ -5,7 +5,12 @@ include 'db.php';
 //PHP CODE  => SUPPLY CRYPTO AMT
 $crypto = "SELECT * FROM cryptocurrency";
 $query_crypto = mysql_query($crypto) or die(mysql_error());
-
+//update notification when seen
+$cookie = $_COOKIE['user'];
+$select_notify = mysql_query("SELECT * FROM notify WHERE notify_user = '$cookie' AND seen = 'no'") or die(mysql_error());
+while($row = mysql_fetch_array($select_notify)){
+$seen_notify = mysql_query("UPDATE notify SET seen = 'yes' WHERE notify_user = '$row[notify_user]'") or die(mysql_error());
+}
 ?>
 <!DOCTYPE html>
 <html>
@@ -50,63 +55,81 @@ $query_crypto = mysql_query($crypto) or die(mysql_error());
 <?php include 'right_sidebar.php'; ?>
 <!-- LEFT SIDEBAR -->
 <?php include 'left_sidebar.php' ?>
-
 	<div class="mobile-menu-overlay"></div>
 
 	<div class="main-container">
-		<div class="xs-pd-20-10 pd-ltr-20">
-			<div class="card-box pd-20 height-100-p mb-30">
-				<div class="row align-items-center">
-					<div class="col-md-4">
-						<img src="vendors/images/banner-img.png" alt="">
-					</div>
-					<div class="col-md-8">
-						<h4 class="font-20 weight-500 mb-10 text-capitalize">
-							Welcome To <div class="weight-600 font-30 text-blue">Cryptocurrency</div>
-						</h4>
-						<p class="font-18 max-width-600"><ul><li><strong>>></strong>Invest in Cryptocurrency : BTC, ETH, TRX, SHIB, BT$</li><li><strong>>></strong>Invest in something you can afford to lose </li><li><strong>>></strong>Dont risk investing all your BT$ into only one asset. Price can <b>FLUCTUATE</b></li></ul></p>
-					</div>
-				</div>
-			</div>
-
-			<div class="title pb-20">
-				<h2 class="h3 mb-0">CRYPTO SUPPLY Overview...</h2>
-			</div>
-
-			<div class="row pb-10">
-			<?php
-			while($row = mysql_fetch_array($query_crypto)){
-			?>
-				<div class="col-xl-3 col-lg-3 col-md-6 mb-20">
-					<div class="card-box height-100-p widget-style3">
-						<div class="d-flex flex-wrap">
-							<div class="widget-data">
-								<div class="weight-700 font-24 text-dark"><?php echo $row['supply'] ?></div>
-								<strong><div class="font-14 text-secondary weight-500"><?php echo $row['symb'] ?> &#149; <?php echo "$".$row['price'] ?></div></strong>
+		<div class="pd-ltr-20 xs-pd-20-10">
+			<div class="min-height-200px">
+				<div class="page-header">
+					<div class="row">
+						<div class="col-md-12 col-sm-12">
+							<div class="title">
+								<h4>Notifications</h4>
 							</div>
-							<?php if($row['symb'] != 'BTS'){ ?>
-							<div class="widget-icon">
-								<a href="trade.php?coin=<?php echo $row['symb'] ?>"><div class="icon" data-color="#00eccf"><i class="fa fa-money text-success"></i></div></a>
-							</div>
-							<?php }else{ ?>
-							<div class="widget-icon">
-								<a href="#"><div class="icon" data-color="#00eccf"><i class="fa fa-calculator text-lg-right"></i></div></a>
-							</div>
-							<?php } ?>
+							<nav aria-label="breadcrumb" role="navigation">
+								<ol class="breadcrumb">
+									<li class="breadcrumb-item"><a href="index.html">Home</a></li>
+									<li class="breadcrumb-item active" aria-current="page">Noifications</li>
+								</ol>
+							</nav>
 						</div>
 					</div>
 				</div>
-			<?php
-			}
-			?>
+				<div class="container pd-0">
+				<?php if(mysql_num_rows($notifications) > 0){ ?>
+					<div class="timeline mb-30">
+						<ul>
+						<?php while($row = mysql_fetch_array($notifications)){ 
+						//getting auth code from request tb
+						$get_request_auth = mysql_query("SELECT * FROM request WHERE user_target = '$fetch_user[user]' AND active = 'no' AND winner = ''") or die(mysql_error());
+						$fetch_request_auth = mysql_fetch_array($get_request_auth);
+						?>
+							<li>
+								<div class="timeline-date">
+									<?php echo $row['date'] ?>
+								</div>
+								<div class="timeline-desc card-box">
+									<div class="pd-20">
+										<h4 class="mb-10 h4"><?php echo $row['title'] ?></h4>
+										<p><?php if($row['title'] == "game request"){ echo $row['msg']." <a href='generate_request.php?auth=".$fetch_request_auth['auth']."'>Click here</a> to activate"; }
+										else if($row['title'] == "game won"){
+										echo $row['msg']." <a href='monitor_request.php'>Click here</a> to view";	
+										}else if($row['title'] == "BTS Deposit"){
+										echo $row['msg'];
+										}
+										 ?></p>
+									</div>
+								</div>
+							</li>
+						<?php } ?>
+						</ul>
+					</div>
+					<?php }else{ ?>
+						<div class="timeline mb-30">
+						<ul>
+							<li>
+								<div class="timeline-date">
+									<?php echo $date ?>
+								</div>
+								<div class="timeline-desc card-box">
+									<div class="pd-20">
+										<h4 class="mb-10 h4">BTS Notification</h4>
+										<p>You do not have any current notification!</p>
+									</div>
+								</div>
+							</li>
+						</ul>
+					</div>
+					<?php } ?>
+					
+				</div>
 			</div>
-		<!-- 
+			<!-- 
 		===========================================
 		================ FOOTER ===================
 		===========================================
 		-->
 		<?php include 'footer.php'; ?>
-		
 		</div>
 	</div>
 	<!-- js -->

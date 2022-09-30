@@ -2,10 +2,13 @@
 //include db
 include 'db.php';
 
-//PHP CODE  => SUPPLY CRYPTO AMT
-$crypto = "SELECT * FROM cryptocurrency";
-$query_crypto = mysql_query($crypto) or die(mysql_error());
+//GET CRYPTOCURRENCY
+$get_crypto = $_GET['coin'];
 
+//PHP CODE  => SUPPLY CRYPTO AMT
+$crypto = "SELECT * FROM cryptocurrency WHERE symb = '$get_crypto'";
+$query_crypto = mysql_query($crypto) or die(mysql_error());
+$fetch_query_crypto = mysql_fetch_array($query_crypto);
 ?>
 <!DOCTYPE html>
 <html>
@@ -62,51 +65,85 @@ $query_crypto = mysql_query($crypto) or die(mysql_error());
 					</div>
 					<div class="col-md-8">
 						<h4 class="font-20 weight-500 mb-10 text-capitalize">
-							Welcome To <div class="weight-600 font-30 text-blue">Cryptocurrency</div>
+							Welcome To <div class="weight-600 font-30 text-blue">Banking: Lending/Borrowing/Witdrawing (<?php echo $_SERVER['PHP_SELF'] ?></div>
 						</h4>
-						<p class="font-18 max-width-600"><ul><li><strong>>></strong>Invest in Cryptocurrency : BTC, ETH, TRX, SHIB, BT$</li><li><strong>>></strong>Invest in something you can afford to lose </li><li><strong>>></strong>Dont risk investing all your BT$ into only one asset. Price can <b>FLUCTUATE</b></li></ul></p>
+						<b><p class="font-18 max-width-600"><ul><li><strong>>></strong>Lending : Deposit your BT$ token in the bank (1% interest accrue above $1M BT$ counts every single day)</li><li><strong><br />>></strong>Borrowing: The privilege to borrow depends on your lending power. deposit 100k BT$ and rights to borrow begins. 100k BT$ borrows accrue at 1k BT$, the more you deposit, the higher the borrowing and payback interest... </li><li><strong><br />>></strong>Withdrawing: Rights to withdraw is allowed at user's amount</li></ul></p></b>
 					</div>
 				</div>
 			</div>
 
 			<div class="title pb-20">
-				<h2 class="h3 mb-0">CRYPTO SUPPLY Overview...</h2>
+				<h2 class="h3 mb-0">BTS BANK</h2>
+				<br>
+				<b>All Deposits: $<?php echo $fetch_query_fetch_sum_all['deposit'] ?></b><br>
+				<b>All Withdrawals: $<?php echo $fetch_query_fetch_sum_all_with['withdraw'] ?></b>
 			</div>
-
+	<?php echo $error ?>
 			<div class="row pb-10">
-			<?php
-			while($row = mysql_fetch_array($query_crypto)){
-			?>
-				<div class="col-xl-3 col-lg-3 col-md-6 mb-20">
+				<div class="col-xl-6 col-lg-4 col-md-6 mb-20">
 					<div class="card-box height-100-p widget-style3">
 						<div class="d-flex flex-wrap">
 							<div class="widget-data">
-								<div class="weight-700 font-24 text-dark"><?php echo $row['supply'] ?></div>
-								<strong><div class="font-14 text-secondary weight-500"><?php echo $row['symb'] ?> &#149; <?php echo "$".$row['price'] ?></div></strong>
+								<div class="weight-700 font-24 text-dark">DEPOSIT/LENDING</div>
+								<strong><div class="font-14 text-secondary weight-500">My Deposit: $<?php echo $fetch_fetch_bank['deposit'] ?></div></strong>
+								<form method="post">
+								<input type="number" name="dep" class="form-control" placeholder="DEPOSIT AMT" required/>
+								
 							</div>
-							<?php if($row['symb'] != 'BTS'){ ?>
 							<div class="widget-icon">
-								<a href="trade.php?coin=<?php echo $row['symb'] ?>"><div class="icon" data-color="#00eccf"><i class="fa fa-money text-success"></i></div></a>
+								<button name="bank_dep" ><div class="icon" data-color="#00eccf"><i class="fa fa-money text-success"></i></div></button>
 							</div>
-							<?php }else{ ?>
-							<div class="widget-icon">
-								<a href="#"><div class="icon" data-color="#00eccf"><i class="fa fa-calculator text-lg-right"></i></div></a>
-							</div>
-							<?php } ?>
+							</form>
 						</div>
 					</div>
 				</div>
-			<?php
-			}
-			?>
+				
+				
+				<div class="col-xl-6 col-lg-4 col-md-6 mb-20">
+					<div class="card-box height-100-p widget-style3">
+						<div class="d-flex flex-wrap">
+							<div class="widget-data">
+								<div class="weight-700 font-24 text-dark">WITHDRAW</div>
+					<strong><div class="font-14 text-secondary weight-500">My Withdraw: $<?php echo $fetch_withdraw_bank['withdraw'] ?></div></strong>
+				
+								<form method="post">
+								<input type="number" class="form-control" name="with" placeholder="WITHDRAW AMT" required />
+							</div>
+							<div class="widget-icon">
+								<button name="bank_with"><div class="icon" data-color="#00eccf"><i class="fa fa-money text-danger"></i></div></button>
+							</div>
+							</form>
+						</div>
+					</div>
+				</div>		
 			</div>
+			
+					<CENTER>
+				<div class="col-xl-6 col-lg-4 col-md-6 mb-20">
+					<div class="card-box height-100-p widget-style3">
+						<div class="d-flex flex-wrap">
+							<div class="widget-data">
+								<div class="weight-700 font-24 text-dark">BORROWING (1.5% <sup><i class="icon-copy fa fa-arrow-circle-up" aria-hidden="true"></i></sup>)</div>
+								<strong><div class="font-14 text-secondary weight-500">$</div></strong>
+								<form method="post">
+								<input type="text" class="form-control" name="borr" placeholder="BORROW AMT (coming soon)" disabled/>
+							</div>
+							<div class="widget-icon">
+								<button name="bank_borr"><div class="icon" data-color="#00eccf"><i class="fa fa-money text-danger"></i></div></button>
+							</div>
+							</form>
+						</div>
+					</div>
+				</div>
+				</CENTER>
+				
+
 		<!-- 
 		===========================================
 		================ FOOTER ===================
 		===========================================
 		-->
 		<?php include 'footer.php'; ?>
-		
 		</div>
 	</div>
 	<!-- js -->

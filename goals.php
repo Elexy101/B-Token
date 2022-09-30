@@ -5,7 +5,6 @@ include 'db.php';
 //PHP CODE  => SUPPLY CRYPTO AMT
 $crypto = "SELECT * FROM cryptocurrency";
 $query_crypto = mysql_query($crypto) or die(mysql_error());
-
 ?>
 <!DOCTYPE html>
 <html>
@@ -58,48 +57,52 @@ $query_crypto = mysql_query($crypto) or die(mysql_error());
 			<div class="card-box pd-20 height-100-p mb-30">
 				<div class="row align-items-center">
 					<div class="col-md-4">
-						<img src="vendors/images/banner-img.png" alt="">
+						<img src="vendors/images/product-img4.jpg" style="border-radius: 2em" alt="">
 					</div>
 					<div class="col-md-8">
 						<h4 class="font-20 weight-500 mb-10 text-capitalize">
-							Welcome To <div class="weight-600 font-30 text-blue">Cryptocurrency</div>
+							Welcome To <div class="weight-600 font-30 text-blue"><i class="icon-copy fa fa-hourglass-half" aria-hidden="true"></i> Goal Request</div>
 						</h4>
-						<p class="font-18 max-width-600"><ul><li><strong>>></strong>Invest in Cryptocurrency : BTC, ETH, TRX, SHIB, BT$</li><li><strong>>></strong>Invest in something you can afford to lose </li><li><strong>>></strong>Dont risk investing all your BT$ into only one asset. Price can <b>FLUCTUATE</b></li></ul></p>
+						<p class="font-18 max-width-600"><ul><li><strong>>></strong> Generate a goal and send to a friend to compete</li><li><strong>>></strong> All your session request are saved in "My Request" </li><li><strong>>></strong> Every gain from a winner gets <strong>5%</strong> gain returns</b></li></ul></p>
 					</div>
 				</div>
 			</div>
 
 			<div class="title pb-20">
-				<h2 class="h3 mb-0">CRYPTO SUPPLY Overview...</h2>
+				<h2 class="h3 mb-0"><i class="icon-copy fa fa-hourglass-half" aria-hidden="true"></i> Goal Overview...</h2>
 			</div>
 
 			<div class="row pb-10">
-			<?php
-			while($row = mysql_fetch_array($query_crypto)){
-			?>
-				<div class="col-xl-3 col-lg-3 col-md-6 mb-20">
+				<div class="col-xl-4 col-lg-4 col-md-6 mb-20">
 					<div class="card-box height-100-p widget-style3">
 						<div class="d-flex flex-wrap">
 							<div class="widget-data">
-								<div class="weight-700 font-24 text-dark"><?php echo $row['supply'] ?></div>
-								<strong><div class="font-14 text-secondary weight-500"><?php echo $row['symb'] ?> &#149; <?php echo "$".$row['price'] ?></div></strong>
+								<div class="weight-600 font-20 text-dark">GENERATE</div>
+								<strong><div class="font-14 text-secondary weight-500">generate a request and send to a friend. Choose a goal and apply for...</div></strong>
 							</div>
-							<?php if($row['symb'] != 'BTS'){ ?>
 							<div class="widget-icon">
-								<a href="trade.php?coin=<?php echo $row['symb'] ?>"><div class="icon" data-color="#00eccf"><i class="fa fa-money text-success"></i></div></a>
+								<a href="generate_request.php"><div class="icon" data-color="#00eccf"><i class="icon-copy fa fa-external-link" aria-hidden="true"></i></div></a>
 							</div>
-							<?php }else{ ?>
-							<div class="widget-icon">
-								<a href="#"><div class="icon" data-color="#00eccf"><i class="fa fa-calculator text-lg-right"></i></div></a>
-							</div>
-							<?php } ?>
 						</div>
 					</div>
 				</div>
-			<?php
-			}
-			?>
+				
+				
+					<div class="col-xl-4 col-lg-4 col-md-6 mb-20">
+					<div class="card-box height-100-p widget-style3">
+						<div class="d-flex flex-wrap">
+							<div class="widget-data">
+								<div class="weight-600 font-20 text-dark">MY REQUESTS</div>
+								<strong><div class="font-14 text-secondary weight-500">all your sessions and those you won and lose..</div></strong>
+							</div>
+							<div class="widget-icon">
+								<a href="monitor_request.php"><div class="icon" data-color="#00eccf"><i class="icon-copy fa fa-external-link" aria-hidden="true"></i></div></a>
+							</div>
+						</div>
+					</div>
+				</div>
 			</div>
+			
 		<!-- 
 		===========================================
 		================ FOOTER ===================

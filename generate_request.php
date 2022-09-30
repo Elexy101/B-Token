@@ -55,51 +55,60 @@ $query_crypto = mysql_query($crypto) or die(mysql_error());
 
 	<div class="main-container">
 		<div class="xs-pd-20-10 pd-ltr-20">
+		<!-- ERROR MODE -->
+		<?php echo $error ?>
+		<?php echo $success?>
+		
 			<div class="card-box pd-20 height-100-p mb-30">
 				<div class="row align-items-center">
 					<div class="col-md-4">
-						<img src="vendors/images/banner-img.png" alt="">
+						<img src="vendors/images/product-img4.jpg" style="border-radius: 2em" alt="">
 					</div>
 					<div class="col-md-8">
 						<h4 class="font-20 weight-500 mb-10 text-capitalize">
-							Welcome To <div class="weight-600 font-30 text-blue">Cryptocurrency</div>
+							Welcome To <div class="weight-600 font-30 text-blue"><i class="icon-copy fa fa-hourglass-half" aria-hidden="true"></i> Goal Request</div>
 						</h4>
-						<p class="font-18 max-width-600"><ul><li><strong>>></strong>Invest in Cryptocurrency : BTC, ETH, TRX, SHIB, BT$</li><li><strong>>></strong>Invest in something you can afford to lose </li><li><strong>>></strong>Dont risk investing all your BT$ into only one asset. Price can <b>FLUCTUATE</b></li></ul></p>
+						<p class="font-18 max-width-600"><ul><li><strong>>></strong> Generate a goal and send to a friend to compete</li><li><strong>>></strong> All your session request are saved in "My Request" </li><li><strong>>></strong> Every request from both side play-users demands <strong>5% tax and 10-15%</strong> gain returns</b></li></ul></p>
 					</div>
 				</div>
 			</div>
 
 			<div class="title pb-20">
-				<h2 class="h3 mb-0">CRYPTO SUPPLY Overview...</h2>
+				<h2 class="h3 mb-0"><i class="icon-copy fa fa-hourglass-1" aria-hidden="true"></i> Generate Request...</h2>
 			</div>
 
-			<div class="row pb-10">
-			<?php
-			while($row = mysql_fetch_array($query_crypto)){
-			?>
-				<div class="col-xl-3 col-lg-3 col-md-6 mb-20">
+		<?php echo $error ?>
+			<?php 
+			$monitor_request3 = mysql_query("SELECT * FROM request WHERE (user = '$fetch_user[user]' or user_target = '$fetch_user[user]') AND (active = 'yes')") or die(mysql_error());
+			if(mysql_num_rows($monitor_request3) > 0){ ?>
+				<center><hr><font color='red'>Sorry, you cant generate another session game challenge. current session still active.  <a href="monitor_request.php">Click here</a></font><hr></center>
+			<?php }else{  ?>
+						<!-- GENERATE REPORT -->
+			<div class="row pb-10">		
+				<div class="col-xl-6 col-lg-8 col-md-8 mb-20">
 					<div class="card-box height-100-p widget-style3">
 						<div class="d-flex flex-wrap">
 							<div class="widget-data">
-								<div class="weight-700 font-24 text-dark"><?php echo $row['supply'] ?></div>
-								<strong><div class="font-14 text-secondary weight-500"><?php echo $row['symb'] ?> &#149; <?php echo "$".$row['price'] ?></div></strong>
+								<form method="post">
+								<!-- send request to user -->
+								<input type="text" class="form-control" name="user" placeholder="Enter username"/><br />
+								
+								<!-- specify request sent to user -->
+								<select class="form-control" name="select_task"><option value="First to gain 10% income">First to gain 5% income<option hidden="true" value="First to own 10 units of an estate">First to own 10 units of an estate</select>
+								<br>
+								<strong>n/b: Detect a >1M BT$ WHALE using developer option <small>(coming soon!!)</small></strong>
 							</div>
-							<?php if($row['symb'] != 'BTS'){ ?>
 							<div class="widget-icon">
-								<a href="trade.php?coin=<?php echo $row['symb'] ?>"><div class="icon" data-color="#00eccf"><i class="fa fa-money text-success"></i></div></a>
+								<button name="generate_request"><div class="icon" data-color="#00eccf"><i class="icon-copy fa fa-hourglass-1" aria-hidden="true"></i></div></button>
 							</div>
-							<?php }else{ ?>
-							<div class="widget-icon">
-								<a href="#"><div class="icon" data-color="#00eccf"><i class="fa fa-calculator text-lg-right"></i></div></a>
-							</div>
-							<?php } ?>
+							</form>
 						</div>
 					</div>
 				</div>
-			<?php
-			}
-			?>
 			</div>
+			<?php } ?>
+			<!-- END OF GENERATE REQUEST  -->
+			
 		<!-- 
 		===========================================
 		================ FOOTER ===================
